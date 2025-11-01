@@ -95,14 +95,19 @@ const Step2 = ({ register, errors }) => (
     </div>
     <div className="mb-3">
       <label className="form-label">Email</label>
-      <input type="email" {...register("email")} className="form-control" />
+      <input
+        type="email"
+        inputMode="email"
+        {...register("email")}
+        className="form-control"
+      />
       {errors.email && (
         <small className="text-danger">{errors.email.message}</small>
       )}
     </div>
     <div className="mb-3">
       <label className="form-label">Phone</label>
-      <input {...register("phone")} className="form-control" />
+      <input type="tel" {...register("phone")} className="form-control" />
       {errors.phone && (
         <small className="text-danger">{errors.phone.message}</small>
       )}
@@ -129,7 +134,12 @@ const Step3 = ({ register, errors }) => (
       </div>
       <div className="col-md-3 mb-3">
         <label className="form-label">ZIP</label>
-        <input type="number" {...register("zip")} className="form-control" />
+        <input
+          type="number"
+          inputMode="numeric"
+          {...register("zip")}
+          className="form-control"
+        />
         {errors.zip && (
           <small className="text-danger">{errors.zip.message}</small>
         )}
@@ -188,6 +198,7 @@ const Step4 = ({ register, watch, errors }) => {
             <label className="form-label">Card Number</label>
             <input
               type="number"
+              inputMode="numeric"
               {...register("cardNumber")}
               className="form-control"
             />
@@ -211,6 +222,7 @@ const Step4 = ({ register, watch, errors }) => {
               <label className="form-label">CVC</label>
               <input
                 type="number"
+                inputMode="numeric"
                 {...register("cvc")}
                 className="form-control"
               />
