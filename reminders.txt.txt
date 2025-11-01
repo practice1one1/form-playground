@@ -1,0 +1,10 @@
+
+
+
+
+----------
+
+Built these real world forms inspired from: https://chatgpt.com/share/68ff6026-6fc0-800e-830a-af5f2d2f9a99
+See Stripe checkout demo form: https://checkout.stripe.dev/checkout
+
+See react-hook-form/ in practice-tutorials for practice forms
