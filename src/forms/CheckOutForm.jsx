@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import pureGlowCream from "../assets/pure-glow-cream.jpeg";
 
 // ------------------ Schemas ------------------
 const personalSchema = z.object({
@@ -69,6 +70,12 @@ const formSchema = z
 // ------------------ Steps ------------------
 const Step1 = () => (
   <div className="text-center">
+    <img
+      src={pureGlowCream}
+      className="img-thumbnail"
+      style={{ height: "50vh" }}
+      alt="Pure Glow Cream"
+    />
     <h4>Pure Glow Cream</h4>
     <p className="text-muted">
       A skin rejuvenating cream for radiant, glowing skin.
