@@ -282,6 +282,13 @@ const Step5 = ({ data }) => (
       <li className="list-group-item">
         Payment: {data.method === "cod" ? "Cash on Delivery" : "Card Payment"}
       </li>
+      {data.method === "card" && (
+        <>
+          <li className="list-group-item">Card Number: {data.cardNumber}</li>
+          <li className="list-group-item">Expiry: {data.expiry}</li>
+          <li className="list-group-item">CVC: {data.cvc}</li>
+        </>
+      )}
     </ul>
   </div>
 );
