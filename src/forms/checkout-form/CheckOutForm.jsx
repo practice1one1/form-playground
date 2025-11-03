@@ -1,72 +1,10 @@
 import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import pureGlowCream from "../assets/pure-glow-cream.jpeg";
+import pureGlowCream from "../../assets/pure-glow-cream.jpeg";
+import formSchema from "./schema";
 
-// ------------------ Schemas ------------------
-const personalSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.email("Invalid email"),
-  phone: z.string().min(10, "Phone number is too short"),
-});
-
-const shippingSchema = z.object({
-  address: z.string().min(5, "Address is required"),
-  city: z.string().min(2, "City is required"),
-  zip: z.coerce
-    .number("Please enter a number ZIP code")
-    .min(3, "ZIP code required"),
-  state: z.string().min(2, "State is required"),
-});
-
-const paymentSchema = z.object({
-  method: z.literal(["cod", "card"], {
-    error: "Select a payment method",
-  }),
-  cardNumber: z
-    .string()
-    .regex(
-      /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/,
-      "Card number must be 16 digits with 3 spaces between"
-    )
-    .optional(),
-  expiry: z
-    .string()
-    .regex(/^(0[1-9]|1[0-2])\s\/\s\d{2}$/, "Use MM/YY format")
-    .optional(),
-  cvc: z.coerce
-    .number()
-    .optional()
-    .refine((val) => !val || /^\d{3,4}$/.test(val), {
-      error: "Invalid CVC",
-    }),
-});
-
-const formSchema = z
-  .object({
-    name: personalSchema.shape.name,
-    email: personalSchema.shape.email,
-    phone: personalSchema.shape.phone,
-    address: shippingSchema.shape.address,
-    city: shippingSchema.shape.city,
-    zip: shippingSchema.shape.zip,
-    state: shippingSchema.shape.state,
-    method: paymentSchema.shape.method,
-    cardNumber: paymentSchema.shape.cardNumber,
-    expiry: paymentSchema.shape.expiry,
-    cvc: paymentSchema.shape.cvc,
-  })
-  .refine(
-    (data) =>
-      data.method === "cod" || (data.cardNumber && data.expiry && data.cvc),
-    {
-      message: "All card details are required for card payment",
-      path: ["cvc"],
-    }
-  );
-
-// ------------------ Steps ------------------
+// Components for each step
 const Step1 = () => (
   <div className="text-center">
     <img
@@ -293,7 +231,7 @@ const Step5 = ({ data }) => (
   </div>
 );
 
-// ------------------ Main Component ------------------
+// Main Component:
 export function CheckOutForm() {
   const {
     register,

@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckOutForm } from "./forms/CheckOutForm";
+import { CheckOutForm } from "./forms/checkout-form/CheckOutForm";
 
 const App = () => {
   return (
