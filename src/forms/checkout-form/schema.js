@@ -21,14 +21,15 @@ const paymentSchema = z.object({
   }),
   cardNumber: z
     .string()
-    .regex(
-      /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/,
+    .trim()
+    .refine(
+      (val) => val === "" || /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/.test(val), // allow empty string as well
       "Card number must be 16 digits with 3 spaces between"
-    )
-    .optional(),
+    ),
   expiry: z
     .string()
     .regex(/^(0[1-9]|1[0-2])\s\/\s\d{2}$/, "Use MM/YY format")
+    .or(z.literal("")) // allow empty string as well
     .optional(),
   cvc: z.coerce
     .number()
