@@ -12,6 +12,7 @@ export const LoanApplicationForm = () => {
     watch,
     formState: { errors },
     setValue,
+    trigger,
   } = useForm({
     resolver: zodResolver(loanSchema),
     mode: "onBlur",
@@ -61,14 +62,21 @@ export const LoanApplicationForm = () => {
             <label className="form-label">
               Bank Statement (PDF, PNG, JPEG)
             </label>
-            <input
-              type="file"
-              {...register("bankStatement")}
-              accept=".pdf,.png,.jpg,.jpeg"
-              className={`form-control ${
-                errors.bankStatement ? "is-invalid" : ""
-              }`}
-            />
+            <div className="input-group">
+              <input
+                type="file"
+                {...register("bankStatement", {onChange: () => trigger("bankStatement")})}
+                accept=".pdf,.png,.jpg,.jpeg"
+                className={`form-control ${errors.bankStatement ? "is-invalid" : ""}`}
+              />
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => setValue("bankStatement", null)}
+              >
+                Clear
+              </button>
+            </div>
             <div className="invalid-feedback">
               {errors.bankStatement?.message}
             </div>
@@ -191,7 +199,7 @@ export const LoanApplicationForm = () => {
             <label className="form-label">Phone</label>
             <PhoneInput
               control={control}
-              className={`form-control ${errors.phone ? "is-invalid" : ""}`}
+              className={`${errors.phone ? "is-invalid" : ""}`}
             />
             <div className="invalid-feedback">{errors.phone?.message}</div>
           </div>
