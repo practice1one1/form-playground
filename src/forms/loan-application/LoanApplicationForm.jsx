@@ -1,8 +1,9 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PhoneInput } from "../../components/IntPhoneInput";
 import { loanSchema } from "./schema";
+import { BankReferences } from "./BankReferences";
 
 export const LoanApplicationForm = () => {
   const {
@@ -16,6 +17,16 @@ export const LoanApplicationForm = () => {
   } = useForm({
     resolver: zodResolver(loanSchema),
     mode: "onBlur",
+    defaultValues: {
+      bankReferences: [
+        { institution: "d", savingsAccount: "s", address: "", phone: "" },
+      ],
+    },
+  });
+
+  const { fields } = useFieldArray({
+    control,
+    name: "bankReferences",
   });
 
   const onSubmit = (data) => {
@@ -365,6 +376,15 @@ export const LoanApplicationForm = () => {
               {...register("comments")}
               className="form-control"
               rows="3"
+            />
+          </div>
+
+          {/*References*/}
+          <div className="col-md-12">
+            <BankReferences
+              fields={fields}
+              register={register}
+              control={control}
             />
           </div>
 
