@@ -43,44 +43,28 @@ const BankReference = ({ index, register, control, errors, remove }) => {
   return (
     <div className="row">
       <div className="col-md-3">
-        <label>
-          Institution Name
-          <input
-            {...register(`bankReferences.${index}.institution`)}
-            className={`form-control ${
-              errorFields?.institution ? "is-invalid" : ""
-            }`}
-          />
-        </label>
+        <label className="form-label">Institution Name</label>
+        <input
+          {...register(`bankReferences.${index}.institution`)}
+          className={`form-control ${
+            errorFields?.institution ? "is-invalid" : ""
+          }`}
+        />
         <div className="invalid-feedback">
           {errorFields?.institution?.message}
         </div>
       </div>
       <div className="col-md-3">
-        <label>
-          Savings Account Name
-          <input
-            {...register(`bankReferences.${index}.savingsAccount`)}
-            className={`form-control ${
-              errorFields?.savingsAccount ? "is-invalid" : ""
-            }`}
-          />
-        </label>
+        <label className="form-label">Savings Account Name</label>
+        <input
+          {...register(`bankReferences.${index}.savingsAccount`)}
+          className={`form-control ${
+            errorFields?.savingsAccount ? "is-invalid" : ""
+          }`}
+        />
         <div className="invalid-feedback">
           {errorFields?.savingsAccount?.message}
         </div>
-      </div>
-      <div className="col-md-2">
-        <label>
-          Address
-          <input
-            {...register(`bankReferences.${index}.address`)}
-            className={`form-control ${
-              errorFields?.address ? "is-invalid" : ""
-            }`}
-          />
-        </label>
-        <div className="invalid-feedback">{errorFields?.address?.message}</div>
       </div>
       <div className="col-md-3">
         <label className="form-label">Contact</label>
@@ -91,6 +75,14 @@ const BankReference = ({ index, register, control, errors, remove }) => {
         <div className="invalid-feedback">
           {errorFields?.institution?.phone}
         </div>
+      </div>
+      <div className="col-md-2">
+        <label className="form-label">Address</label>
+        <input
+          {...register(`bankReferences.${index}.address`)}
+          className={`form-control ${errorFields?.address ? "is-invalid" : ""}`}
+        />
+        <div className="invalid-feedback">{errorFields?.address?.message}</div>
       </div>
 
       <div className="col-md-1 d-flex align-items-center">
