@@ -7,6 +7,7 @@ export const BankReferences = ({
   control,
   append,
   remove,
+  errors,
 }) => {
   return (
     <div className="col-md-12">
@@ -17,6 +18,7 @@ export const BankReferences = ({
           control={control}
           register={register}
           remove={remove}
+          errors={errors}
         />
       ))}
       <button
@@ -67,14 +69,7 @@ const BankReference = ({ index, register, control, errors, remove }) => {
         </div>
       </div>
       <div className="col-md-3">
-        <label className="form-label">Contact</label>
-        <PhoneInput
-          control={control}
-          className={`form-control ${errorFields?.phone ? "is-invalid" : ""}`}
-        />
-        <div className="invalid-feedback">
-          {errorFields?.institution?.phone}
-        </div>
+        <PhoneInput name={`bankReferences.${index}.phone`} control={control} />
       </div>
       <div className="col-md-2">
         <label className="form-label">Address</label>

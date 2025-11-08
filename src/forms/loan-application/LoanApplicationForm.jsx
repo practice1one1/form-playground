@@ -218,12 +218,7 @@ export const LoanApplicationForm = () => {
             <div className="invalid-feedback">{errors.email?.message}</div>
           </div>
           <div className="col-md-6">
-            <label className="form-label">Phone</label>
-            <PhoneInput
-              control={control}
-              className={`form-control ${errors.phone ? "is-invalid" : ""}`}
-            />
-            <div className="invalid-feedback">{errors.phone?.message}</div>
+            <PhoneInput name={"phone"} control={control} />
           </div>
 
           {/* Address */}
@@ -387,6 +382,7 @@ export const LoanApplicationForm = () => {
               control={control}
               append={append}
               remove={remove}
+              errors={errors}
             />
           </div>
 

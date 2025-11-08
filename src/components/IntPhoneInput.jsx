@@ -3,28 +3,26 @@ import { Controller } from "react-hook-form";
 import PhoneNumberInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
-export const PhoneInput = ({ control, className = "phone-input" }) => {
-  // ".phone-input" is for default styling from react-phone-number-input/style.css
-
+export const PhoneInput = ({ name, control, className: otherClasses }) => {
   return (
     <div>
       <Controller
-        name="phone"
+        name={name}
         control={control}
-        rules={{ required: "Phone number is required" }}
         render={({ field, fieldState }) => (
           <div>
+            <label className="form-label">Phone</label>
             <PhoneNumberInput
               {...field}
               international // to enforce international format (of including +... code prior to number)
               defaultCountry="UG"
               placeholder="Enter phone number of any country"
-              className={className}
+              className={`form-control ${
+                fieldState.error ? "is-invalid" : ""
+              } ${otherClasses}`}
               style={{ display: "flex" }} // to align the flag/country select & phone number input horizontally in a line
             />
-            {fieldState.error?.phone && (
-              <p>{fieldState.error?.phone.message}</p>
-            )}
+            <div className="invalid-feedback">{fieldState.error?.message}</div>
           </div>
         )}
       />
