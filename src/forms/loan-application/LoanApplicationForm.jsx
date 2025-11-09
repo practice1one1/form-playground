@@ -38,8 +38,8 @@ export const LoanApplicationForm = () => {
 
   const loanPurpose = watch("loanPurpose");
 
-  // console.log("file", watch("bankStatement"));
-  // console.log("errors", errors);
+  // console.log("watch", watch("consent"));
+  console.log("errors", errors);
 
   return (
     <div className="container mt-4">
@@ -392,6 +392,43 @@ export const LoanApplicationForm = () => {
               errors={errors}
               countryCode={countryCode}
             />
+          </div>
+
+          {/* Consent */}
+          <div className="col-md-12">
+            <h4>Consent</h4>
+
+            <div className="form-check">
+              <div className="d-flex align-items-start">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  className={`form-check-input me-2 ${
+                    errors.consent ? "is-invalid" : ""
+                  }`}
+                  {...register("consent", {
+                    onChange: () => trigger("consent"),
+                  })}
+                />
+                <label htmlFor="consent" className="form-check-label">
+                  I authorize prospective Credit Grantors/Lending/Leasing
+                  Companies to obtain personal and credit information about me
+                  from my employer and credit bureau, or credit reporting
+                  agency, any person who has or may have any financial dealing
+                  with me, or from any references I have provided. This
+                  information, as well as that provided by me in the
+                  application, will be referred to in connection with this lease
+                  and any other relationships we may establish from time to
+                  time. Any personal and credit information obtained may be
+                  disclosed from time to time to other lenders, credit bureaus
+                  or other credit reporting agencies.
+                </label>
+              </div>
+              {/* `.invalid-feedback` needs to be at same level of nesting as `.form-check-input`, but nesting it inside `.d-flex` above doesn't position it below the text hence applied `.form-check` as well */}
+              <div className="invalid-feedback d-block w-100">
+                {errors.consent?.message}
+              </div>
+            </div>
           </div>
 
           <div className="col-12 text-end">

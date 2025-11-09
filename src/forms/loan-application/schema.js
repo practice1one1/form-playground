@@ -82,4 +82,7 @@ export const loanSchema = z.object({
         .optional(),
     })
   ),
+  consent: z.coerce
+    .boolean()
+    .refine((bool) => bool, "Please show consent to the above actions"),
 });
