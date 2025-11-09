@@ -1,0 +1,2 @@
+MORE FEATURES TO ADD & BUGS TO FIX:
+- Phone input in bank references should be an optional field and shouldn't display errors if submitted empty

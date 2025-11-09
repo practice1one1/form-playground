@@ -8,6 +8,7 @@ export const BankReferences = ({
   append,
   remove,
   errors,
+  countryCode,
 }) => {
   return (
     <div className="col-md-12">
@@ -19,6 +20,7 @@ export const BankReferences = ({
           register={register}
           remove={remove}
           errors={errors}
+          countryCode={countryCode}
         />
       ))}
       <button
@@ -39,7 +41,14 @@ export const BankReferences = ({
   );
 };
 
-const BankReference = ({ index, register, control, errors, remove }) => {
+const BankReference = ({
+  index,
+  register,
+  control,
+  errors,
+  remove,
+  countryCode,
+}) => {
   const errorFields = errors?.bankReferences?.[index];
 
   return (
@@ -73,6 +82,7 @@ const BankReference = ({ index, register, control, errors, remove }) => {
           name={`bankReferences.${index}.phone`}
           control={control}
           errors={errorFields}
+          countryCode={countryCode}
         />
       </div>
       <div className="col-md-2">

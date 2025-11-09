@@ -24,6 +24,8 @@ export const LoanApplicationForm = () => {
     },
   });
 
+  const [countryCode, setCountryCode] = React.useState("");
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "bankReferences",
@@ -37,7 +39,7 @@ export const LoanApplicationForm = () => {
   const loanPurpose = watch("loanPurpose");
 
   // console.log("file", watch("bankStatement"));
-  console.log("errors", errors);
+  // console.log("errors", errors);
 
   return (
     <div className="container mt-4">
@@ -218,7 +220,12 @@ export const LoanApplicationForm = () => {
             <div className="invalid-feedback">{errors.email?.message}</div>
           </div>
           <div className="col-md-6">
-            <PhoneInput name={"phone"} control={control} errors={errors} />
+            <PhoneInput
+              name={"phone"}
+              control={control}
+              errors={errors}
+              onCountryChange={(countryCode) => setCountryCode(countryCode)} // set countryCode state to be shared with phone input in BankReferneces below
+            />
           </div>
 
           {/* Address */}
@@ -383,6 +390,7 @@ export const LoanApplicationForm = () => {
               append={append}
               remove={remove}
               errors={errors}
+              countryCode={countryCode}
             />
           </div>
 

@@ -8,6 +8,8 @@ export const PhoneInput = ({
   control,
   errors,
   className: otherClasses,
+  onCountryChange,
+  countryCode = "UG",
 }) => {
   return (
     <div>
@@ -16,7 +18,8 @@ export const PhoneInput = ({
         name={name}
         control={control}
         international // to enforce international format (of including +... code prior to number)
-        defaultCountry="UG"
+        defaultCountry={countryCode}
+        onCountryChange={onCountryChange}
         placeholder="Enter phone number of any country"
         className={`form-control ${
           errors?.phone ? "is-invalid" : ""
