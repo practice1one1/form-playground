@@ -54,7 +54,7 @@ const BankReference = ({
 }) => {
   const errorFields = errors?.bankReferences?.[index];
   return (
-    <div key={field.id} className="row align-items-start mb-3">
+    <div className="row align-items-start mb-3">
       <div className="col-md-3">
         <label
           htmlFor={`bankReferences.${index}.institution`}

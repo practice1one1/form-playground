@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PhoneInput } from "../../components/IntPhoneInput";
 import { loanSchema } from "./schema";
 import { BankReferences } from "./BankReferences";
+import { LoanPurposeFieldset } from "./LoanPurposeFieldset";
 
 export const LoanApplicationForm = () => {
   const {
@@ -30,7 +31,6 @@ export const LoanApplicationForm = () => {
   });
 
   const [countryCode, setCountryCode] = React.useState("");
-  const loanPurpose = watch("loanPurpose");
 
   const onSubmit = (data) => console.log("Submitted ✅:", data);
   const onError = (err) => console.error("Error ❌:", err);
@@ -127,51 +127,11 @@ export const LoanApplicationForm = () => {
           </div>
 
           {/* Loan Purpose */}
-          <fieldset className="col-md-12" aria-describedby="loanPurpose-error">
-            <legend className="form-label fs-6">Purpose of Loan</legend>
-            {[
-              "Education",
-              "Business",
-              "Home Improvement",
-              "House Buying",
-              "Investment",
-              "Other",
-            ].map((purpose) => (
-              <div className="form-check form-check-inline" key={purpose}>
-                <input
-                  id={`loan-${purpose}`}
-                  type="radio"
-                  value={purpose}
-                  {...register("loanPurpose")}
-                  className="form-check-input"
-                  aria-invalid={!!errors.loanPurpose}
-                />
-                <label htmlFor={`loan-${purpose}`} className="form-check-label">
-                  {purpose}
-                </label>
-              </div>
-            ))}
-            {errors.loanPurpose && (
-              <div id="loanPurpose-error" className="text-danger small">
-                {errors.loanPurpose.message}
-              </div>
-            )}
-          </fieldset>
-
-          {/* Conditional Other Purpose */}
-          {loanPurpose === "Other" && (
-            <div className="col-md-12">
-              <label htmlFor="otherPurpose" className="form-label">
-                Other Purpose
-              </label>
-              <textarea
-                id="otherPurpose"
-                {...register("otherPurpose")}
-                className="form-control"
-                rows="2"
-              />
-            </div>
-          )}
+          <LoanPurposeFieldset
+            control={control}
+            register={register}
+            errors={errors}
+          />
 
           {/* Personal Information */}
           <div className="col-md-2">
