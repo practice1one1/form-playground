@@ -1,6 +1,6 @@
 import React from "react";
 import { Controller } from "react-hook-form";
-import PhoneNumberInput from "react-phone-number-input/react-hook-form"; // Prefer using the pre-made component by react-phone-number-input especially for integrating wiht react-hook-form
+import PhoneNumberInput from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
 
 export const PhoneInput = ({
@@ -11,22 +11,32 @@ export const PhoneInput = ({
   onCountryChange,
   countryCode = "UG",
 }) => {
+  const errorId = `${name}-error`;
+
   return (
     <div>
-      <label className="form-label">Phone</label>
+      <label htmlFor={name} className="form-label">
+        Phone
+      </label>
+
       <PhoneNumberInput
+        id={name}
         name={name}
         control={control}
-        international // to enforce international format (of including +... code prior to number)
+        international
         defaultCountry={countryCode}
         onCountryChange={onCountryChange}
         placeholder="Enter phone number of any country"
-        className={`form-control ${
-          errors?.phone ? "is-invalid" : ""
-        } ${otherClasses}`}
-        style={{ display: "flex" }} // to align the flag/country select & phone number input horizontally in a line
+        className={`form-control ${errors?.phone ? "is-invalid" : ""} ${otherClasses}`}
+        style={{ display: "flex" }}
+        aria-label="Phone number input with country selector"
+        aria-invalid={!!errors?.phone}
+        aria-describedby={errors?.phone ? errorId : undefined}
       />
-      <div className="invalid-feedback">{errors?.phone?.message}</div>
+
+      <div id={errorId} className="invalid-feedback">
+        {errors?.phone?.message}
+      </div>
     </div>
   );
 };
