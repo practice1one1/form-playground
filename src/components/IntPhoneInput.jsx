@@ -2,15 +2,15 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import PhoneNumberInput from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
+import { useCountryCode } from "../forms/loan-application/CountryCodeContext";
 
 export const PhoneInput = ({
   name,
   control,
   errors,
   className: otherClasses,
-  onCountryChange,
-  countryCode = "UG",
 }) => {
+  const { countryCode, setCountryCode } = useCountryCode();
   const errorId = `${name}-error`;
 
   return (
@@ -25,9 +25,11 @@ export const PhoneInput = ({
         control={control}
         international
         defaultCountry={countryCode}
-        onCountryChange={onCountryChange}
+        onCountryChange={setCountryCode}
         placeholder="Enter phone number of any country"
-        className={`form-control ${errors?.phone ? "is-invalid" : ""} ${otherClasses}`}
+        className={`form-control ${
+          errors?.phone ? "is-invalid" : ""
+        } ${otherClasses}`}
         style={{ display: "flex" }}
         aria-label="Phone number input with country selector"
         aria-invalid={!!errors?.phone}

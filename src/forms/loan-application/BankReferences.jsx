@@ -1,5 +1,6 @@
 import React from "react";
 import { PhoneInput } from "../../components/IntPhoneInput";
+import { useCountryCode } from "./CountryCodeContext";
 
 export const BankReferences = ({
   fields,
@@ -8,8 +9,8 @@ export const BankReferences = ({
   append,
   remove,
   errors,
-  countryCode,
 }) => {
+  const { countryCode } = useCountryCode();
   return (
     <section aria-label="Referee Bank Information">
       <h2 className="h5 mt-3">Bank References</h2>

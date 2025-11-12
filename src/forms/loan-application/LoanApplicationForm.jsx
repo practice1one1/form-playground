@@ -30,8 +30,6 @@ export const LoanApplicationForm = () => {
     name: "bankReferences",
   });
 
-  const [countryCode, setCountryCode] = React.useState("");
-
   const onSubmit = (data) => console.log("Submitted ✅:", data);
   const onError = (err) => console.error("Error ❌:", err);
 
@@ -232,12 +230,7 @@ export const LoanApplicationForm = () => {
           </div>
 
           <div className="col-md-6">
-            <PhoneInput
-              name="phone"
-              control={control}
-              errors={errors}
-              onCountryChange={(countryCode) => setCountryCode(countryCode)} // set countryCode state to be shared with phone input in BankReferneces below
-            />
+            <PhoneInput name="phone" control={control} errors={errors} />
           </div>
 
           {/* Address */}
@@ -482,7 +475,6 @@ export const LoanApplicationForm = () => {
               append={append}
               remove={remove}
               errors={errors}
-              countryCode={countryCode}
             />
           </section>
 
