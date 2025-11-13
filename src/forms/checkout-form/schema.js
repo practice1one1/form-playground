@@ -38,6 +38,9 @@ const paymentSchema = z.object({
     .refine((val) => !val || /^\d{3,4}$/.test(val), {
       error: "Invalid CVC",
     }),
+  sameBillingShipping: z.boolean(),
+  address: z.string().optional(),
+  state: z.string().optional(),
 });
 
 const formSchema = z
@@ -53,13 +56,27 @@ const formSchema = z
     cardNumber: paymentSchema.shape.cardNumber,
     expiry: paymentSchema.shape.expiry,
     cvc: paymentSchema.shape.cvc,
+    sameBillingShipping: paymentSchema.shape.sameBillingShipping,
+    billingAddress: paymentSchema.shape.address,
+    billingState: paymentSchema.shape.state,
   })
   .refine(
     (data) =>
       data.method === "cod" || (data.cardNumber && data.expiry && data.cvc),
     {
-      message: "All card details are required for card payment",
+      error: "All card details are required for card payment",
       path: ["cvc"],
+    }
+  )
+  .refine(
+    (data) => {
+      if (!data.sameBillingShipping) {
+        return data.billingAddress && data.billingState;
+      } else return true;
+    },
+    {
+      error: "Please enter separate billing address information",
+      path: ["billingAddress"],
     }
   );
 

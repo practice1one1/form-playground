@@ -94,7 +94,7 @@ const Step3 = ({ register, errors }) => (
 );
 
 const Step4 = ({ register, watch, errors, setValue, trigger }) => {
-  const method = watch("method");
+  const fields = watch(["method", "sameBillingShipping"]);
   return (
     <div>
       <div className="mb-3">
@@ -130,7 +130,7 @@ const Step4 = ({ register, watch, errors, setValue, trigger }) => {
         </div>
       </div>
 
-      {method === "card" && (
+      {fields[0] === "card" && (
         <div className="border p-3 rounded bg-light">
           <div className="mb-3">
             <label className="form-label">Card Number</label>
@@ -199,6 +199,46 @@ const Step4 = ({ register, watch, errors, setValue, trigger }) => {
                 <small className="text-danger">{errors.cvc.message}</small>
               )}
             </div>
+          </div>
+
+          <div className="mb-3">
+            <input
+              id="sameBillingShippingAddresses"
+              type="checkbox"
+              defaultChecked
+              {...register("sameBillingShipping", { valueAsBoolean: true })}
+            />
+            <label htmlFor="sameBillingShippingAddresses">
+              Billing address is same as for shipping
+            </label>
+            {fields[1] === false && (
+              <div>
+                <div className="mb-3">
+                  <label className="form-label">Billing Address</label>
+                  <input
+                    {...register("billingAddress")}
+                    className="form-control"
+                  />
+                  {errors.billingAddress && (
+                    <small className="text-danger">
+                      {errors.billingAddress.message}
+                    </small>
+                  )}
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label className="form-label">Billing State</label>
+                  <input
+                    {...register("billingState")}
+                    className="form-control"
+                  />
+                  {errors.billingState && (
+                    <small className="text-danger">
+                      {errors.billingState.message}
+                    </small>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
