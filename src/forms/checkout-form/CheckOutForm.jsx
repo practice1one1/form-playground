@@ -279,7 +279,7 @@ export function CheckOutForm() {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isValid },
     trigger,
     getValues,
     setValue,
@@ -357,6 +357,8 @@ export function CheckOutForm() {
                 type="submit"
                 className="btn btn-success"
                 value="Submit Order"
+                disabled={!isValid}
+                aria-disabled={!isValid}
               />
             )}
           </div>

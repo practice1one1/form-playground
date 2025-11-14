@@ -12,7 +12,7 @@ export const LoanApplicationForm = () => {
     control,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue,
     trigger,
   } = useForm({
@@ -540,7 +540,12 @@ export const LoanApplicationForm = () => {
         </fieldset>
 
         <div className="col-12 text-end">
-          <button type="submit" className="btn btn-primary mt-3">
+          <button
+            type="submit"
+            className="btn btn-primary mt-3"
+            disabled={!isValid}
+            aria-disabled={!isValid}
+          >
             Submit Application
           </button>
         </div>
