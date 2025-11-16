@@ -1,5 +1,5 @@
-
-
+replace react.svg in index.html favicon and meta & OGP tags
+replace my github url in OGP tag with deployed URL
 
 
 ----------
